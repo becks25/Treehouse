@@ -2,6 +2,7 @@
 
 var https = require('https');
 var http = require('http');
+var weather = require('./weather.js');
 
 function geocode(zipcode){
 	var request = https.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipcode + '&key=AIzaSyAK5Xo22fBf-TfIclUeN_wl3flKt6mD1DY', function(response){
@@ -21,7 +22,7 @@ function geocode(zipcode){
 					output.push(parsedBody.geometry.location.lat);
 					output.push(parsedBody.geometry.location.lng);
 
-					return output;
+					weather.get(output);
 				}catch(error){
 					console.error("Unable to find location. Please enter a valid zipcode.");
 
@@ -44,10 +45,6 @@ function geocode(zipcode){
 
 }
 
-
-function printOutput(output){
-	console.log(output);
-}
 
 
 module.exports.geocode = geocode;

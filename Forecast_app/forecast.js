@@ -1,15 +1,11 @@
 //takes in zipcode or postal code from command line
 // and returns the forecast for today
 
-
+//convert zipcode to lat/long
 //connect to forecast.io
 //ask for weather of specific zip/postal
-//geocode lat and lon
 //return forecast for today
 
-//https://api.forecast.io/forecast/apikey/lat,long
-
-//google: AIzaSyAK5Xo22fBf-TfIclUeN_wl3flKt6mD1DY
 
 
 var location = require('./geocode.js');
