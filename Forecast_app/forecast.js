@@ -10,7 +10,7 @@
 
 var location = require('./geocode.js');
 
-var apikey = '4ab36d9a0a102bb55ce2d6406ca67c25';
+var input = process.argv.slice(2);
 
-location.geocode(10022);
+input.forEach(location.geocode);
 

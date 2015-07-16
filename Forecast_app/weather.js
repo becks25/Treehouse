@@ -36,7 +36,7 @@ function get(info){
 
 	
 					}catch(error){
-					console.error("Unable to find weather for that location." + error.message);
+					console.error("Unable to find weather for that location.");
 				}
 			});
 
@@ -57,7 +57,7 @@ function get(info){
 
 function printWeather(data){
 	console.log("Location: " + data[0]);
-	console.log("It is currently " + data[1] + "F and " + data[2] + ", with a high of " + data[3] + " and a low of " + data[4] + ", and a " + data[5] + "% chance of " + data[6] + ".");
+	console.log("It is currently " + data[1] + "F and " + data[2] + ", with a high of " + data[3] + " and a low of " + data[4] + ", and a " + data[5] + "% chance of " + data[6] + "." + "\r\n");
 }
 
 module.exports.get = get;
