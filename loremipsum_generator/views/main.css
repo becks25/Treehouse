@@ -15,4 +15,14 @@ body{
 		color: red;
 
 }
+
+ #error-banner {
+    width: 100%;
+    padding:5px;
+    background: #FFE6B2;
+    color: #C5A14E;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 </style>
