@@ -30,14 +30,12 @@ function showPage(template, values, response){
 	var fileContents = fs.readFileSync('./views/' + template, {encoding: 'utf8'});
 
 	fileContents = mergeValues(values, fileContents);
-
 	response.write(fileContents);
 }
 
 function mergeValues(values, content){
 	for(var key in values){
 		content = content.replace("{{" + key + "}}", values[key]);
-		console.log(content);
 	}
 
 	return content;

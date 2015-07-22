@@ -14,12 +14,10 @@ var generate = require('./generator.js');
 
 http.createServer(function(request, response){
 	
-	response.writeHead(200)
-	render.showPage('header.html', {}, response);
-	render.showPage('form.html', {}, response);
-	render.showPage('main.css', {}, response);
-	render.showPage('lorem.js', {}, response);
-	render.showPage('footer.html', {}, response);
+	response.writeHead(200, '/');
+
+
+
 	generate.getPostData(response, request);
 
 }).listen(1337);

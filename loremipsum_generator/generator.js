@@ -2,20 +2,44 @@
 var querystring = require('querystring');
 var http = require('http');
 var render = require('./render.js');
+var stream = require('stream');
 
 function getPostData(response, request){
-	if(request.method === 'POST'){
+	var urlBody = request.url.replace('/', '');
+	if(urlBody !== ""){
+		var num = /^(\d+)/;
+		var splitBody = urlBody.split(num);
+		if(splitBody.length === 3){
+			var body ={ 
+				number: +splitBody[1], 
+				typeOfText: splitBody[2]
+			}
+			getLorem(body,response);
+		}
+	}else if(request.method === 'POST'){
 		request.on('data', function(postBody){
 			var body = querystring.parse(postBody.toString());
-			getLorem(body, response);
+			response.writeHead(303, {'location': '/' + body.number + body.typeOfText});
+			response.end();
+
 		});
+
+		request.on('error', function(e){
+			console.error("this time? " + e.message);
+		})
+	}else{
+		render.showPage('header.html', {}, response);
+		render.showPage('form.html', {}, response);
+		render.showPage('main.css', {}, response);
+		render.showPage('lorem.js', {}, response);
+		render.showPage('footer.html', {}, response);
 	}
 
 }
 
 function getLorem(body, pageResponse){
 	var num = body.number;
-	var text = body.typeOfText;
+	var text = body.typeOfText.toLowerCase();
 
 	var askFor;
 
@@ -33,6 +57,7 @@ function getLorem(body, pageResponse){
 
 			response.on('data', function(chunk){
 				body+= chunk;
+				console.log(body);
 			});
 
 			response.on('end', function(){
@@ -57,12 +82,11 @@ function displayOutput(num, text, body, response){
 	output.num = num;
 	output.text = text;
 
-	var end_sentence = /[\.\?!]/
-	var end_word = /[\.\?! ]/
+	var end_sentence = /[\.\?!]/;
+	var end_word = /[\.\?! ]/;
 
 
 	if(text === 'paragraphs'){
-		console.log(body);
 		output.body = body;
 	}else if(text ==='sentences'){
 		output.body = body.split(end_sentence, num).join(".");
