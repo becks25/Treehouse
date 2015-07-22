@@ -1,0 +1,18 @@
+<style>
+#num-text{
+	border-radius:5px;
+}
+
+body{
+	background-color:#B5C4E1;
+}
+
+.error{
+	display:none;
+}
+
+.red{
+		color: red;
+
+}
+</style>
