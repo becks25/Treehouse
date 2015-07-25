@@ -4,6 +4,7 @@ var http = require('http');
 var render = require('./render.js');
 var stream = require('stream');
 
+//figure out what to render based on the url
 function getPostData(response, request){
 	var urlBody = request.url.replace('/', '');
 	if(urlBody === 'error'){
